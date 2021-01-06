@@ -1,0 +1,26 @@
+{
+     "category":[ "Küçük Ev Aletleri",
+        "Kişisel Bakım",
+        "Bahçe, Yapı Market",
+        "Beyaz Eşya, Klima",
+        "Ev, Yaşam",
+        "Telefonlar",
+        "Oto Aksesuar",
+        "Outdoor",
+        "Spor",
+        "Diğer Kategoriler" ]
+    
+    
+        myObj = {
+            "name":"John",
+            "age":30,
+            "cars": {
+              "car1":"Ford",
+              "car2":"BMW",
+              "car3":"Fiat"
+            }
+           
+    
+    }
+    
+    

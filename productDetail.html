@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoplyer</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
+  <link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
+  
+
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./fancybox-master/jquery.fancybox.css">
+  <script type="text/javascript" src="./fancybox-master/jquery.fancybox.js"></script>
+
+
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <script src="https://kit.fontawesome.com/d9973f5636.js" crossorigin="anonymous"></script>
+
+  <!--category javascript start-->
+  <script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./owlcarousel/owl.carousel.js"></script>
+  <script>document.write('<script type="text/javascript" src="./js/basket.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+</head>
+<script>
+
+
+  function NotBarFill() {
+    var NotInt;
+    NotInt = NotBarUpdater();
+    htmlitem = `<span class="NotBar" id="hi">${NotInt}</span>`;
+    var AppendSelector = $(".NotBarContainer");
+    $(AppendSelector).empty();
+
+    if (NotInt > 0) {
+
+
+      $(htmlitem).appendTo('.NotBarContainer');
+      $(".NotBar").addClass('flash');
+      setTimeout(function () {
+        $('.NotBar').removeClass('flash');
+      }, 1000);
+    }
+    else {
+
+    }
+
+  }
+
+</script>
+<script>
+
+  $(document).on("click", ".addcart", function () {
+    var selectedItem = $(this).data('title');
+
+    $.get("./js/products.json", function (data) {
+      AddBasket(data[selectedItem - 1]);
+      NotBarFill();
+    });
+
+
+
+
+  });
+
+
+
+  function FillProduct() {
+    NotBarFill();
+
+
+    var urlstring = window.location.href;
+    var productid = urlstring.substr(urlstring.indexOf("ProductId=") + 10, 2);
+
+    var flag = null;
+    $.get("./js/products.json", function (data) {
+
+
+
+
+
+      for (i = 0; i < data.length; i++) {
+
+        if (data[i].id == productid) {
+          flag = i;
+        }
+      }
+
+
+      var imageArr = data[flag].image.split(",");
+
+
+      var htmlitem1 = `
+        <div class="verticaldiv smallimg">
+      
+      
+        
+    <div class="verticaldiv smallimg" id="tumpimgs">
+
+      </div>
+   
+      <a data-fancybox="gallery" href="${imageArr[0]}">  <div  class="tumpimg" style="background-image:url('${imageArr[0]}'" ></div></a>
+
+      <a data-fancybox="gallery" href="${imageArr[1]}">  <div class="tumpimg" style="background-image:url('${imageArr[1]}'"></div></a>
+
+      
+      <a data-fancybox="gallery" href="${imageArr[2]}">  <div class="tumpimg" style="background-image:url('${imageArr[2]}'"></div></a>
+
+</div>
+<a data-fancybox="gallery" href="${imageArr[0]}"> 
+
+ 
+   
+
+  <div class="img-magnifier-container">
+  <div class="verticaldiv bigimg" src="${imageArr[0]}"  style="background-image:url('${imageArr[0]}'"></div> 
+   </div>
+  </a>
+
+<div class="verticaldiv destrip">
+  
+
+<h1>${data[flag].title} </h1>
+<h5>Ürün Kodu:${data[flag].product_code}</h5>
+<h4><a href="./index.html?brand=${data[flag].brand}">${data[flag].brand}</a></h4>
+<h3>${data[flag].price} TL</h3>`;
+
+      var htmlitem2Cargo = `<div class="CargoPrice"><i class="fas fa-shipping-fast"></i> Ücretsiz Kargo</div>`;
+      var htmlitem3 = `<h6>Tahmini Kargo Gönderim Süresi: Bugün</h6>
+<button class="addcart" data-title="${data[flag].id}" onClick="notifyBar()" ><i class="fas fa-shopping-cart"></i> Sepete Ekle</button>
+</div>
+<div class="verticaldiv starcontainer">
+<div class="stardiv"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+    class="fas fa-star"></i><i class="fas fa-star"></i>
+  <p>Değerlendirme</p>
+</div>
+</div>`;
+      var htmlsum;
+      (data[flag].isFreeCargo) ? htmlsum = (htmlitem1 + htmlitem2Cargo + htmlitem3) : htmlsum = (htmlitem1 + htmlitem3);
+      $(htmlsum).appendTo('#fillContainer');
+      CategoryNameFinder(data[flag].category_id);
+
+    })
+
+  }
+
+
+</script>
+
+<body>
+
+
+
+
+
+
+
+
+  <div class="headerCont">
+    <span class="logo"><a href="./index.html">Shoplyer</a></span>
+
+    <ul>
+      <li><a href="./index.html">Anasayfa</a></li>
+      <li><a href="#">Hesabım</a></li>
+      <li><a href="./basket.html">Sepetim</a>
+        <span class="NotBarContainer"></span>
+
+  </div>
+  </li>
+
+  </ul>
+  </div>
+
+
+  <hr class="hrline">
+  <div class="productContainer CategoryBar">
+    <script>
+
+
+      $(document).ready(function () {
+
+
+        FillProductToOwl();
+
+        FillProduct();
+
+        //background img urls add to div "href" attr for pop up gallery.//
+        $("#tumpimgs .tumpimg").each(function (e) {
+          var item = $('.tumpimg').eq(e);
+          item.attr("href", item.css("background-image").replace(/^url\(["']?/, '').replace(/["']?\)$/, ''));
+        })
+
+        $('.bigimg').attr("href", $('.bigimg').css("background-image").replace(/^url\(["']?/, '').replace(/["']?\)$/, ''));
+
+        /////
+      });
+
+    </script>
+
+    <h5 class="NavMap2"><a href="./index.html">Anasayfa \&nbsp; </a> </h5>
+    <h5 class="navMap"></h5> &nbsp;
+    <span class="searchbar"> <i class="searchicon fas fa-search"></i> <input type="text" onfocus="this.value=''"
+        class="textbox" value="Aramak istediğiniz ürünün bilgilerini girin">
+      <div class="resultdiv"></div>
+    </span>
+  </div>
+  <script>
+
+    $(document).ready(function () {
+      $(document).on("click", function (event) {
+        event.target.className == "resultdiv" ? true : $('.resultdiv').css('display', 'none');
+      })
+    });
+
+    var searchflag = 0;
+    $('.searchicon').on('click', (e) => {
+      searchflag++;
+      (searchflag % 2) == 1 ? $('.textbox').css("display", "inline-block") : $('.textbox').css("display", "none");
+    });
+
+
+
+    var timeout = null
+    $('.textbox').on('keyup', function () {
+
+      clearTimeout(timeout)
+      timeout = setTimeout(function () {
+
+        var val = $(".textbox").val();
+        SearchBox(val);
+
+      }, 500)
+    })
+
+    function SearchBox(querystr) {
+
+      $.get("./js/products.json", function (data) {
+        var regex = new RegExp(querystr, "i");
+        filteredSearch = data.filter(x => x.brand.match(regex) || x.product_code.match(regex) || x.title.match(regex));
+
+        var htmlitemsum = "";
+
+        $.each(filteredSearch, function (index, value) {
+          htmlitemsum += `
+         <h2> <a href="./productDetail.html?ProductId=${value.id}"> <b>${value.brand}</b>  ${value.title} </a><h2>`;
+        });
+
+        $('.resultdiv').empty();
+        var emptyMsg = `<h2>Sonuç bulunamadı.<h2>`;
+          var GoResults=`<h2> <a href="./index.html?search=${querystr}">Sonuçlara gitmek için tıklayın.</a><h2>`;
+        (htmlitemsum == "") ? $(emptyMsg).appendTo('.resultdiv') : $(htmlitemsum+GoResults).appendTo('.resultdiv');
+
+        $('.resultdiv').css('display', 'block');
+
+      });
+
+    }
+
+
+  </script>
+  <div class="productContainer" id="fillContainer">
+
+  </div>
+
+  <div class="productContainer otherproducts">
+    <h1>Diğer Ürünler</h1>
+  </div>
+
+
+  
+
+  
+  
+
+  <div class="productContainer">
+
+    <div class="owl-carousel" id="owlcontainer">
+
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="tabscontainer">
+    <script>
+
+
+      $(document).ready(function () {
+        document.getElementById("defaultopen").click();
+      });
+
+
+
+      function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+      }
+    </script>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" id="defaultopen" onclick="openCity(event, 'London')">Ürün Açıklaması</button>
+      <button class="tablinks" onclick="openCity(event, 'Paris')">Yorumlar</button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">İade Koşulları</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="London" class="tabcontent">
+      <h3>London</h3>
+      <p>London is the capital city of England.
+        Ea aute exercitation ea velit minim. Aliqua officia sint nulla eiusmod. Non tempor pariatur consequat incididunt
+        nisi velit. Culpa nulla adipisicing labore ea et tempor voluptate deserunt duis sunt labore. Veniam minim eu
+        excepteur dolore incididunt sint labore.
+      </p>
+    </div>
+
+    <div id="Paris" class="tabcontent">
+      <h3>Paris</h3>
+      <p>Paris is the capital of France.
+        Ea aute exercitation ea velit minim. Aliqua officia sint nulla eiusmod. Non tempor pariatur consequat incididunt
+        nisi velit. Culpa nulla adipisicing labore ea et tempor voluptate deserunt duis sunt labore. Veniam minim eu
+        excepteur dolore incididunt sint labore.
+      </p>
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+      <h3>Tokyo</h3>
+      <p>
+        Ea aute exercitation ea velit minim. Aliqua officia sint nulla eiusmod. Non tempor pariatur consequat incididunt
+        nisi velit. Culpa nulla adipisicing labore ea et tempor voluptate deserunt duis sunt labore. Veniam minim eu
+        excepteur dolore incididunt sint labore.Tokyo is the capital of Japan.</p>
+    </div>
+
+  </div>
+
+
+
+
+</body>
+
+</html>
