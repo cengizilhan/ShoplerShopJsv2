@@ -476,7 +476,7 @@ background-image:url('../imgs/products/ayakkabi1.png');
   width:244px;
   height:370px;
   border:1px solid #F4B95F;
-  margin-left:14px;
+  
   cursor: pointer;
 }
 
@@ -885,18 +885,10 @@ margin-left:15px;
 .zoom {
   display:inline-block;
   position: relative;
-}
 
-/* magnifying glass icon */
-.zoom:after {
-  content:'';
-  display:block; 
-  width:33px; 
-  height:33px; 
-  position:absolute; 
-  top:0;
-  right:0;
-  background:url(icon.png);
+  margin-left:14px;
+  
+  
 }
 
 .zoom img {

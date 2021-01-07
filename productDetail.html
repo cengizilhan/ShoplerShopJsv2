@@ -29,14 +29,7 @@
   <script src="./owlcarousel/owl.carousel.js"></script>
   <script>document.write('<script type="text/javascript" src="./js/basket.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
   <script src='./js/jquery.zoom.js'></script>
-	<script>
-		$(document).ready(function(){
-			$('#ex1').zoom();
-			$('#ex2').zoom({ on:'grab' });
-			$('#ex3').zoom({ on:'click' });			 
-			$('#ex4').zoom({ on:'toggle' });
-		});
-	</script>
+
 </head>
 <script>
 
@@ -107,6 +100,7 @@
 
 
       var htmlitem1 = `
+      
         <div class="verticaldiv smallimg">
       
       
@@ -129,9 +123,7 @@
    
  
 	<span class='zoom' id='ex1'>
-		
-    
-    <img class="verticaldiv bigimg"  src='${imageArr[0]}'> </img>	
+		<img class="verticaldiv bigimg"  src='${imageArr[0]}'> </img>	
 	</span>
   
 
@@ -163,7 +155,14 @@
       (data[flag].isFreeCargo) ? htmlsum = (htmlitem1 + htmlitem2Cargo + htmlitem3) : htmlsum = (htmlitem1 + htmlitem3);
       $(htmlsum).appendTo('#fillContainer');
      
-
+  
+		$(document).ready(function(){
+			$('#ex1').zoom();
+			$('#ex2').zoom({ on:'grab' });
+			$('#ex3').zoom({ on:'click' });			 
+			$('#ex4').zoom({ on:'toggle' });
+		});
+	
       CategoryNameFinder(data[flag].category_id);
 
     })
