@@ -10,15 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
   <link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
-  
 
+  
   
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./fancybox-master/jquery.fancybox.css">
   <script type="text/javascript" src="./fancybox-master/jquery.fancybox.js"></script>
-
-
 
 
   <link
@@ -30,6 +28,15 @@
   <script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
   <script src="./owlcarousel/owl.carousel.js"></script>
   <script>document.write('<script type="text/javascript" src="./js/basket.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+  <script src='./js/jquery.zoom.js'></script>
+	<script>
+		$(document).ready(function(){
+			$('#ex1').zoom();
+			$('#ex2').zoom({ on:'grab' });
+			$('#ex3').zoom({ on:'click' });			 
+			$('#ex4').zoom({ on:'toggle' });
+		});
+	</script>
 </head>
 <script>
 
@@ -120,10 +127,18 @@
 
  
    
+ 
+	<span class='zoom' id='ex1'>
+		
+    
+    <img class="verticaldiv bigimg"  src='${imageArr[0]}'> </img>	
+	</span>
+  
 
-  <div class="img-magnifier-container">
-  <div class="verticaldiv bigimg" src="${imageArr[0]}"  style="background-image:url('${imageArr[0]}'"></div> 
-   </div>
+ 
+	
+	
+
   </a>
 
 <div class="verticaldiv destrip">
@@ -147,6 +162,8 @@
       var htmlsum;
       (data[flag].isFreeCargo) ? htmlsum = (htmlitem1 + htmlitem2Cargo + htmlitem3) : htmlsum = (htmlitem1 + htmlitem3);
       $(htmlsum).appendTo('#fillContainer');
+     
+
       CategoryNameFinder(data[flag].category_id);
 
     })
@@ -156,29 +173,29 @@
 
 </script>
 
+
+
 <body>
-
-
-
-
-
-
-
-
+ 
+    
+  
   <div class="headerCont">
     <span class="logo"><a href="./index.html">Shoplyer</a></span>
 
     <ul>
       <li><a href="./index.html">Anasayfa</a></li>
       <li><a href="#">Hesabım</a></li>
-      <li><a href="./basket.html">Sepetim</a>
+      <li><a href="./basket.html" >Sepetim</a>
         <span class="NotBarContainer"></span>
+
+        
 
   </div>
   </li>
 
   </ul>
   </div>
+  
 
 
   <hr class="hrline">
@@ -364,8 +381,7 @@
   </div>
 
 
-
-
+  
 </body>
 
 </html>
