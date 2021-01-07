@@ -476,7 +476,7 @@ background-image:url('../imgs/products/ayakkabi1.png');
   width:244px;
   height:370px;
   border:1px solid #F4B95F;
-  
+  margin-left:14px;
   cursor: pointer;
 }
 
@@ -881,21 +881,3 @@ margin-left:15px;
   width:86%;    
 }
 }
-/* zoom */
-.zoom {
-  display:inline-block;
-  position: relative;
-
-  margin-left:14px;
-  
-  
-}
-
-.zoom img {
-  display: block;
-}
-
-.zoom img::selection { background-color: transparent; }
-
-#ex2 img:hover { cursor: url(grab.cur), default; }
-#ex2 img:active { cursor: url(grabbed.cur), default; }
