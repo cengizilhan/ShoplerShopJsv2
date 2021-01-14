@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoplyer</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <script src="https://kit.fontawesome.com/d9973f5636.js" crossorigin="anonymous"></script>
+
+  <!--category javascript start-->
+  <script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="./js/keyConstants.js"></script>
+  <script type="text/javascript" src="./js/session.js"></script>
+  <script type="text/javascript" src="./js/profile.js"></script>
+  
+  <script>document.write('<script type="text/javascript" src="./js/basket.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+  <script>
+    $(document).ready(function () {
+
+
+      ProductFilter();
+      CategoryFill();
+
+    });
+
+
+    function CategoryFill() {
+
+      $.get("js/category.json", function (data) {
+        var appendItem = $(".verticalNavigation ul");
+        for (i = 0; i < data.length; i++) {
+          var htmlItem = '<li class="categoryLi"><a  href="' + data[i].link + '">' + data[i].color + '<i class="fas fa-angle-double-right"></i></a></li>';
+          /* $(appendItem).append(htmlItem); */
+        }
+      });
+    }
+  </script>
+  <!--category javascript done-->
+
+  <!--products javascript start-->
+  <script>
+    function ProductFilter() {
+
+      $.get("js/products.json", function (data) {
+
+        var urlstring = window.location.href;
+        var categoryParse = urlstring.substr(urlstring.indexOf("=") + 1, 1);
+        var appendItem = $(".ShopItemsContainer");
+
+
+
+        if (urlstring.indexOf("category") != -1) {
+
+          for (i = 0; i < data.length; i++) {
+            if (data[i].category_id == categoryParse) {
+              var imageArr = data[i].image.split(",");
+              var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
+                ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
+                ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+      /*        $(appendItem).append(htmlItem); */
+            }
+          }
+        } 
+       
+     
+
+      });
+    }
+
+   
+
+
+  </script>
+  <!--products javascript done-->
+
+
+</head>
+
+<body>
+
+
+  <script>
+    function runn() {
+      localStorage.clear();
+    }
+  </script>
+  <div class="headerCont">
+    <span class="logo"><a href="./index.html">Shoplyer</a></span>
+
+    <ul>
+      <li><a href="./index.html" >Anasayfa</a></li>
+      <li ><a class="LoginCont" href="#">Hesabım</a>
+        <ul id="loginUl" class="loginUl">
+          <li class="loginLi"><a href="./login.html">Giriş Yap</a></li>
+          <li class="loginLi"><a href="./register.html">Kayıt Ol</a></li>
+        </ul>
+      </li>
+      <script>
+        $(document).ready(function () {
+          $(".LoginCont").mouseover(function () {
+            $(".loginLi").addClass("displaytest");
+            setTimeout(function () {  $(".loginLi").removeClass("displaytest"); }, 3000);
+          
+          });
+
+            
+     
+          
+
+        });
+      </script>
+
+      <li><a href="./basket.html">Sepetim</a>
+        <span class="NotBarContainer"></span>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+  <script>
+
+    NotBarFill();
+
+    function NotBarFill() {
+      var NotInt;
+      NotInt = NotBarUpdater();
+      htmlitem = `<span class="NotBar" id="hi">${NotInt}</span>`;
+      var AppendSelector = $(".NotBarContainer");
+      $(AppendSelector).empty();
+
+      if (NotInt > 0) {
+
+
+        $(htmlitem).appendTo('.NotBarContainer');
+        $(".NotBar").addClass('flash');
+        setTimeout(function () {
+          $('.NotBar').removeClass('flash');
+        }, 1000);
+      }
+      else {
+
+      }
+
+    }
+
+  </script>
+
+  <div class="pageContainer">
+    <div class="verticalNavigation">
+      <ul>
+        <li class="MenuButton"><span class="checkboxicon">Kategoriler</span><i class="fas fa-bars checkboxicon "></i>
+        </li>
+        <li class="categoryLi"><a  href="#">Profilim<i class="fas fa-angle-double-right"></i></a></li>
+        <script>
+          flag = 0;
+          $(document).ready(function () {
+            $(".checkboxicon").click(function () {
+
+
+              //var beverage = (age >= 21) ? "Beer" : "Juice"; 
+
+
+              if (flag == 0) {
+                //alert("1");
+                flag = 1;
+                $(".verticalNavigation ul .categoryLi").css("display", "flow-root");
+              }
+              else if (flag == 1) {
+
+                flag = 0;
+                $(".verticalNavigation ul .categoryLi").css("display", "none");
+              }
+
+            });
+
+          });
+        </script>
+        <!--  
+Data come from below section as javascript / json
+      <li><a href="#news">Diğer Kategoriler<i class="fas fa-angle-double-right"></i></a></li>-->
+
+      </ul>
+    </div>
+
+    <div class="content">
+      <hr class="hrline">
+      <h1 class="BrandNav" style="display: block; font-size:25px">Profil Bilgilerim</h1>
+      <p style="color:#707070;margin-left:19px;margin-top:10px;font-size:18px;">Kullanıcı adınız: <script>
+      var name=SessionRead();
+      document.writeln(name);</script></p>
+      
+    
+    </div>
+
+
+  </div>
+
+
+
+
+
+</body>
+
+</html>

@@ -52,57 +52,57 @@
         var categoryParse = urlstring.substr(urlstring.indexOf("=") + 1, 1);
         var appendItem = $(".ShopItemsContainer");
 
-        
+
 
         if (urlstring.indexOf("category") != -1) {
 
           for (i = 0; i < data.length; i++) {
             if (data[i].category_id == categoryParse) {
               var imageArr = data[i].image.split(",");
-            var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
+              var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
                 ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
                 ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
               $(appendItem).append(htmlItem);
             }
           }
         } /* Search */
-        else if ((urlstring.indexOf("search") != -1)){
-          var brandParse=urlstring.substr(urlstring.indexOf("=") + 1);
-        
+        else if ((urlstring.indexOf("search") != -1)) {
+          var brandParse = urlstring.substr(urlstring.indexOf("=") + 1);
+
           $('.slider').empty();
-          $('.BrandNav').append(brandParse+' aramasının sonuçları');
+          $('.BrandNav').append(brandParse + ' aramasının sonuçları');
           $('.BrandNav').css("display", "block");
-       
+
           var regex = new RegExp(brandParse, "i");
-        filteredSearch = data.filter(x => x.brand.match(regex) || x.product_code.match(regex) || x.title.match(regex));
+          filteredSearch = data.filter(x => x.brand.match(regex) || x.product_code.match(regex) || x.title.match(regex));
 
-        var htmlitemsum = "";
+          var htmlitemsum = "";
 
-        $.each(filteredSearch, function (index, value) {
-          var imageArr = value.image.split(",");
-          htmlitemsum +=  '<div class="ShopItems" ><div class="ShopItem" data-title="' + value.id + '" style="background: url(' + imageArr[0] +
-                ');background-size:150px 200px;"></div> ' + value.title + ' <p><b><i>' + value.price +
-                ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + value.id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
-                
-              });
+          $.each(filteredSearch, function (index, value) {
+            var imageArr = value.image.split(",");
+            htmlitemsum += '<div class="ShopItems" ><div class="ShopItem" data-title="' + value.id + '" style="background: url(' + imageArr[0] +
+              ');background-size:150px 200px;"></div> ' + value.title + ' <p><b><i>' + value.price +
+              ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + value.id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
 
-       
-        $(htmlitemsum).appendTo(appendItem);
+          });
 
-       
+
+          $(htmlitemsum).appendTo(appendItem);
+
+
 
 
         }
-        else if ((urlstring.indexOf("brand") != -1)){
-          var brandParse=urlstring.substr(urlstring.indexOf("=") + 1);
+        else if ((urlstring.indexOf("brand") != -1)) {
+          var brandParse = urlstring.substr(urlstring.indexOf("=") + 1);
           $('.slider').empty();
-          $('.BrandNav').append(brandParse+' Markasına Ait Ürünler');
+          $('.BrandNav').append(brandParse + ' Markasına Ait Ürünler');
           $('.BrandNav').css("display", "block");
-       
+
           for (i = 0; i < data.length; i++) {
             if (data[i].brand == brandParse) {
               var imageArr = data[i].image.split(",");
-            var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
+              var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
                 ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
                 ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
               $(appendItem).append(htmlItem);
@@ -114,7 +114,7 @@
           for (i = 0; i < data.length; i++) {
             var imageArr = data[i].image.split(",");
 
-            var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0]  +
+            var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
               ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
               ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
             $(appendItem).append(htmlItem);
@@ -172,16 +172,35 @@
     <span class="logo"><a href="./index.html">Shoplyer</a></span>
 
     <ul>
-      <li><a href="./index.html">Anasayfa</a></li>
-      <li><a href="#">Hesabım</a></li>
+      <li><a href="./index.html" class="inn">Anasayfa</a></li>
+      <li ><a class="LoginCont" href="./profile.html">Hesabım</a>
+        <ul id="loginUl" class="loginUl">
+          <li class="loginLi"><a href="./login.html">Giriş Yap</a></li>
+          <li class="loginLi"><a href="./register.html">Kayıt Ol</a></li>
+        </ul>
+      </li>
+      <script>
+        $(document).ready(function () {
+          $(".LoginCont").mouseover(function () {
+            $(".loginLi").addClass("displaytest");
+            setTimeout(function () {  $(".loginLi").removeClass("displaytest"); }, 3000);
+          
+          });
+
+            
+     
+          
+
+        });
+      </script>
+
       <li><a href="./basket.html">Sepetim</a>
         <span class="NotBarContainer"></span>
 
+      </li>
 
-  </div>
-  </li>
+    </ul>
 
-  </ul>
   </div>
 
   <script>
@@ -215,32 +234,31 @@
   <div class="pageContainer">
     <div class="verticalNavigation">
       <ul>
-        <li class="MenuButton"><span class="checkboxicon">Kategoriler</span><i class="fas fa-bars checkboxicon "></i></li>
+        <li class="MenuButton"><span class="checkboxicon">Kategoriler</span><i class="fas fa-bars checkboxicon "></i>
+        </li>
         <script>
-        flag=0;      
+          flag = 0;
           $(document).ready(function () {
-           $(".checkboxicon").click(function() { 
-  
-                             
-      //var beverage = (age >= 21) ? "Beer" : "Juice"; 
+            $(".checkboxicon").click(function () {
 
-            
-             if (flag==0)
-             {
-               //alert("1");
-               flag=1;
-               $( ".verticalNavigation ul .categoryLi" ).css("display","flow-root");
-             }
-              else if (flag==1)
-             {
-          
-               flag=0;
-               $( ".verticalNavigation ul .categoryLi" ).css("display","none");
-             } 
-             
-     });
-           
-  });
+
+              //var beverage = (age >= 21) ? "Beer" : "Juice"; 
+
+
+              if (flag == 0) {
+                //alert("1");
+                flag = 1;
+                $(".verticalNavigation ul .categoryLi").css("display", "flow-root");
+              }
+              else if (flag == 1) {
+
+                flag = 0;
+                $(".verticalNavigation ul .categoryLi").css("display", "none");
+              }
+
+            });
+
+          });
         </script>
         <!--  
 Data come from below section as javascript / json
@@ -250,8 +268,8 @@ Data come from below section as javascript / json
     </div>
 
     <div class="content">
-      <hr class="hrline" >
-      <h1  class="BrandNav"></h1>
+      <hr class="hrline">
+      <h1 class="BrandNav"></h1>
       <section class="lazy slider" data-sizes="50vw" style="margin-top:20px;">
 
         <div>
@@ -272,6 +290,9 @@ Data come from below section as javascript / json
       <!--Slick Slider Carousel Start-->
       <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
       <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+      <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
+      <script src="./js/session.js" type="text/javascript" charset="utf-8"></script>
+      <script src="./js/keyConstants.js" type="text/javascript" charset="utf-8"></script>
 
       <script type="text/javascript">
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shoplyer</title>
+  <title>Shoplyer Detail</title>
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/custom.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -80,8 +80,9 @@
 
 
   function FillProduct() {
+    
     NotBarFill();
-
+    
 
     var urlstring = window.location.href;
     var productid = urlstring.substr(urlstring.indexOf("ProductId=") + 10, 2);
@@ -89,7 +90,7 @@
     var flag = null;
     $.get("./js/products.json", function (data) {
 
-
+      
 
 
 
@@ -102,7 +103,7 @@
 
 
       var imageArr = data[flag].image.split(",");
-
+      
       var htmlitem1 = `
       
         <div class="verticaldiv smallimg">
@@ -142,7 +143,7 @@
   
 
 <h1>${data[flag].title} </h1>
-<h5>Ürün Kodu:${data[flag].product_code}</h5>
+<h5>Ürün Kodu: ${data[flag].product_code}</h5>
 <h4><a href="./index.html?brand=${data[flag].brand}">${data[flag].brand}</a></h4>
 <h3>${data[flag].price} TL</h3>`;
 
@@ -158,7 +159,9 @@
 </div>`;
       var htmlsum;
       (data[flag].isFreeCargo) ? htmlsum = (htmlitem1 + htmlitem2Cargo + htmlitem3) : htmlsum = (htmlitem1 + htmlitem3);
+      
       $(htmlsum).appendTo('#fillContainer');
+      
      
 
 $(document).ready(function() {

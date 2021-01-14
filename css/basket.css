@@ -24,6 +24,16 @@ body{
   text-decoration: none;
   color:#707070;
 }
+.logo a:hover{
+  color:#F4B95F;
+}
+.inn{
+
+  color:#F4B95F !important;
+  }
+  .headerCont ul li a:hover{
+    color:#F4B95F;
+  }
 
 
 .headerCont ul {
