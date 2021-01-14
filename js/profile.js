@@ -3,7 +3,7 @@ $(document).ready(function () {
     if (SessionRead()==null)
     {  
     AlertSessionEmpty();
-   setTimeout(function () { window.location = "../login.html"; }, 3000);
+   setTimeout(function () { window.location = "./login.html"; }, 3000);
     }
     else{
 
