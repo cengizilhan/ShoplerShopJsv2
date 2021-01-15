@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" type="text/css" href="./slick/slick.css">
   <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
@@ -61,7 +62,7 @@
               var imageArr = data[i].image.split(",");
               var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
                 ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
-                ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+                ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
               $(appendItem).append(htmlItem);
             }
           }
@@ -82,7 +83,7 @@
             var imageArr = value.image.split(",");
             htmlitemsum += '<div class="ShopItems" ><div class="ShopItem" data-title="' + value.id + '" style="background: url(' + imageArr[0] +
               ');background-size:150px 200px;"></div> ' + value.title + ' <p><b><i>' + value.price +
-              ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + value.id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+              ' TL</i></b></p><div class="addBasket"  data-title="' + value.id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
 
           });
 
@@ -104,7 +105,7 @@
               var imageArr = data[i].image.split(",");
               var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
                 ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
-                ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+                ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
               $(appendItem).append(htmlItem);
             }
           }
@@ -116,7 +117,7 @@
 
             var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
               ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
-              ' TL</i></b></p><div class="addBasket" onClick="notifyBar()" data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+              ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
             $(appendItem).append(htmlItem);
 
 
@@ -133,8 +134,9 @@
       var selectedItem = $(this).data('title');
 
       $.get("./js/products.json", function (data) {
-        console.log(data[selectedItem - 1])
+       
         AddBasket(data[selectedItem - 1]);
+        swal("İşlem Başarılı!", "Ürün sepete eklendi!", "success");
         NotBarFill();
 
 

@@ -1,15 +1,4 @@
-function notifyBar() {
-  if (!$(".alert-box").length) {
-    $(
-      '<div class="alert-box success" ><div>Ürün sepete eklendi! <a href="./basket.html">Sepete gitmek için tıklayın.</a></div></div>'
-    )
-      .prependTo("body")
-      .delay(3000)
-      .fadeOut(1000, function () {
-        $(".alert-box").remove();
-      });
-  }
-}
+
 
 function NotBarUpdater() {
   var storedNames = JSON.parse(localStorage.getItem("products"));
@@ -109,6 +98,7 @@ function AddBasket(pushItem) {
     setToStorage("products", JSON.stringify([pushItem]));
 
   }
+  
 }
 
 

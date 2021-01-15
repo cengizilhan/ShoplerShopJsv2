@@ -12,6 +12,36 @@ body{
     
     
 }
+
+.loginUl
+{
+  
+  padding:0px !important;;
+  list-style: none !important;;
+  width: fit-content !important;;
+  margin:0 !important;;
+  position: absolute !important;; 
+  margin-left: 213px !important;
+  padding:0 !important;
+  flex-direction: column !important;
+  display: flex !important;;
+  z-index: 1 !important;;
+  margin-top:10px !important;;
+}
+.loginLi
+{
+  background-color: white !important;
+  padding:0 !important;
+  padding-bottom:10px !important;
+  font-size:25px;
+  display:none !important;
+  padding-right:20px !important;
+}
+.displaytest {
+  display:block !important;
+}
+.loginLi:hover
+{color:#F4B95F !important;}
 .logo
 {
     font-size:35px;

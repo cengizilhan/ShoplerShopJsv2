@@ -14,6 +14,7 @@
     rel="stylesheet">
   <script src="https://kit.fontawesome.com/d9973f5636.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
   <script>document.write('<script type="text/javascript" src="./js/basket.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
 
 </head>
@@ -45,11 +46,37 @@
   $(document).on("click", ".RemoveItem", function() {
   var selectedItem=$(this).data('title');
   var data=JSON.parse(localStorage.getItem("products"));
-  CountChanger(selectedItem,"remove");
-  $(".CardContainer").remove();
-  BasketFill();
+
+  swal("Silmek istediğinize emin misiniz?", {
+  buttons: {
+    cancel: "Hayır!",
+    catch: {
+      text: "Evet eminim!",
+      value: "yes",
+    },
+  
+  },
+})
+.then((value) => {
+  switch (value) {
+    case "yes":
+    
+    
+    CountChanger(selectedItem,"remove");
+    $(".CardContainer").remove();
+    BasketFill();
   PriceCalculator();
+  swal("İşlem Başarılı!", "Ürün sepetinizden silindi!", "success");
+ 
+      break;
+ 
+  }
+});
+
+  
+
         });
+
 
         $(document).on("click", ".decraseBtn", function() {
           var selectedItem=$(this).parent().parent().parent().parent().data('title');
@@ -86,7 +113,10 @@
         $(appendItem2).append(htmlEmpty); }
 
       for (i = 0; i < data.length; i++)
-      {var htmlItem2='<div class="CardContainer" data-title="'+data[i].id+'" ><div class="CardHeader"><p class="ProductName">'+(i+1)+') '+data[i].title+'</p></div><div class="CardBody"><div class="ProductImg" style="background: url('+data[i].image+');width: 150px;height:200px;background-size:cover;background-position: center;margin-left:7%;"></div><div class="ProductDetail"><p>'+data[i].description+'</p><div class="DetailBottomContainer"><button class="RemoveItem" data-title="'+data[i].id+'">Sepetten Sil</button><button class="decraseBtn">-</button><b> '+data[i].basket_piece+' Adet </b><button class="increaseBtn">+</button><b class="price">'+data[i].price+' TL</b></div></div></div></div>';
+
+      {
+        var imageArr = data[i].image.split(",");
+        var htmlItem2='<div class="CardContainer" data-title="'+data[i].id+'" ><div class="CardHeader"><p class="ProductName">'+(i+1)+') '+data[i].title+'</p></div><div class="CardBody"><div class="ProductImg" style="background: url('+imageArr[0]+');width: 150px;height:200px;background-size:cover;background-position: center;margin-left:7%;"></div><div class="ProductDetail"><p>'+data[i].description+'</p><div class="DetailBottomContainer"><button class="RemoveItem" data-title="'+data[i].id+'">Sepetten Sil</button><button class="decraseBtn">-</button><b> '+data[i].basket_piece+' Adet </b><button class="increaseBtn">+</button><b class="price">'+data[i].price+' TL</b></div></div></div></div>';
       var appendItem2 = $("#CardCont"); 
       $(appendItem2).append(htmlItem2);
 
@@ -130,14 +160,42 @@
 </script>
 
 <script> </script>
-  <div class="headerCont">
-    <span class="logo"><a href="./index.html">Shoplyer</a></span>
-    <ul>
-      <li><a href="./index.html">Anasayfa</a></li>
-      <li><a href="./profile.html">Hesabım</a></li>
-      <li><a href="./basket.html" class="inn">Sepetim</a></li>
-    </ul>
-  </div>
+<div class="headerCont">
+  <span class="logo"><a href="./index.html">Shoplyer</a></span>
+
+  <ul>
+    <li><a href="./index.html" >Anasayfa</a></li>
+    <li ><a class="LoginCont" href="./profile.html">Hesabım</a>
+      <ul id="loginUl" class="loginUl">
+        <li class="loginLi"><a href="./login.html">Giriş Yap</a></li>
+        <li class="loginLi"><a href="./register.html">Kayıt Ol</a></li>
+      </ul>
+    </li>
+    <script>
+      $(document).ready(function () {
+        $(".LoginCont").mouseover(function () {
+          $(".loginLi").addClass("displaytest");
+          setTimeout(function () {  $(".loginLi").removeClass("displaytest"); }, 3000);
+        
+        });
+
+          
+   
+        
+
+      });
+    </script>
+
+    <li><a href="./basket.html" class="inn">Sepetim</a>
+      <span class="NotBarContainer"></span>
+
+    </li>
+
+  </ul>
+
+</div>
+
+
   <hr style="width: 40%; margin-top:-1px;margin-left:464px;border-top: 1px solid #dedede;">
   <div class="pageContainer">
     <div class="headline">
