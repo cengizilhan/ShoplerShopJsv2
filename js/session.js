@@ -92,7 +92,10 @@ function SessionSet(id) {
 }
 
 function SessionRead() {
-    var id= sessionStorage.getItem(SessionID);
+
+        var id= sessionStorage.getItem(SessionID);
+     
+  
 
 
     return id;

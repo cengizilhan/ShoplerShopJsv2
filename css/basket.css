@@ -356,3 +356,20 @@ background: linear-gradient(180deg, rgba(86,171,47,1) 0%, rgba(145,209,84,1) 70%
 
 
       }
+
+      .LoginWarn {
+        background-color: #F4B95F;
+        color:#707070;
+        padding:5px;
+        margin-left:50px;
+        width: fit-content;
+        margin-bottom:10px;
+        display: none;
+        
+      }
+      .LoginWarn a{
+        color:#707070;
+        text-emphasis: none;
+        font-weight: 500;
+        
+      }

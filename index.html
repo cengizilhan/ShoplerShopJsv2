@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shoplyer</title>
   <link rel="stylesheet" href="./css/reset.css">
+
+  <link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
+  <link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
   <link rel="stylesheet" href="./css/custom.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" type="text/css" href="./slick/slick.css">
@@ -59,11 +62,30 @@
 
           for (i = 0; i < data.length; i++) {
             if (data[i].category_id == categoryParse) {
+              
               var imageArr = data[i].image.split(",");
-              var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
+              var htmlItemOldie = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
                 ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
                 ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+
+                var htmlItem=`
+        <div class="ShopItems">
+          <div class="ShopItem" data-title="${data[i].id}">
+
+            <div class="owl-carousel owl-1 owl-theme">
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[0]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[1]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[2]}"></div>
+            </div>
+        </div>
+          ${data[i].title} <p><b><i>${data[i].price}TL</i></b></p>
+          <div class="addBasket"  data-title="${data[i].id}" ><i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
+          </div>
+        </div>
+
+        `;
               $(appendItem).append(htmlItem);
+              owlLoader();
             }
           }
         } /* Search */
@@ -75,20 +97,38 @@
           $('.BrandNav').css("display", "block");
 
           var regex = new RegExp(brandParse, "i");
-          filteredSearch = data.filter(x => x.brand.match(regex) || x.product_code.match(regex) || x.title.match(regex));
+          
+         filteredSearch = data.filter(x => x.brand.match(regex) || x.product_code.match(regex) || x.title.match(regex));
 
           var htmlitemsum = "";
 
           $.each(filteredSearch, function (index, value) {
             var imageArr = value.image.split(",");
-            htmlitemsum += '<div class="ShopItems" ><div class="ShopItem" data-title="' + value.id + '" style="background: url(' + imageArr[0] +
-              ');background-size:150px 200px;"></div> ' + value.title + ' <p><b><i>' + value.price +
-              ' TL</i></b></p><div class="addBasket"  data-title="' + value.id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+            
 
+            htmlitemsum +=`
+        <div class="ShopItems">
+          <div class="ShopItem" data-title="${value.id}">
+
+            <div class="owl-carousel owl-1 owl-theme">
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[0]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[1]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[2]}"></div>
+            </div>
+        </div>
+          ${value.title} <p><b><i>${value.price}TL</i></b></p>
+          <div class="addBasket"  data-title="${value.id}" ><i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
+          </div>
+        </div>
+
+        `;
+     
           });
 
+          
 
           $(htmlitemsum).appendTo(appendItem);
+          owlLoader();
 
 
 
@@ -103,10 +143,24 @@
           for (i = 0; i < data.length; i++) {
             if (data[i].brand == brandParse) {
               var imageArr = data[i].image.split(",");
-              var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
-                ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
-                ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+              var htmlItem=`
+        <div class="ShopItems">
+          <div class="ShopItem" data-title="${data[i].id}">
+
+            <div class="owl-carousel owl-1 owl-theme">
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[0]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[1]}"> </div>
+              <div class="item"><img class="ProductOwlImg" src="${imageArr[2]}"></div>
+            </div>
+        </div>
+          ${data[i].title} <p><b><i>${data[i].price}TL</i></b></p>
+          <div class="addBasket"  data-title="${data[i].id}" ><i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
+          </div>
+        </div>
+
+        `;
               $(appendItem).append(htmlItem);
+              owlLoader();
             }
           }
         }
@@ -115,10 +169,24 @@
           for (i = 0; i < data.length; i++) {
             var imageArr = data[i].image.split(",");
 
-            var htmlItem = '<div class="ShopItems" ><div class="ShopItem" data-title="' + data[i].id + '" style="background: url(' + imageArr[0] +
-              ');background-size:150px 200px;"></div> ' + data[i].title + ' <p><b><i>' + data[i].price +
-              ' TL</i></b></p><div class="addBasket"  data-title="' + data[i].id + '"><i class="fas fa-shopping-cart"></i> Add to Cart</div></div>';
+            var htmlItem=`
+        <div class="ShopItems" data-title="${data[i].id}">
+          <div class="ShopItem" data-title="${data[i].id}">
+
+            <div class="owl-carousel owl-1 owl-theme" data-title="${data[i].id}">
+              <div class="item" ><img class="ProductOwlImg" data-title="${data[i].id}" src="${imageArr[0]}"> </div>
+              <div class="item" ><img class="ProductOwlImg" data-title="${data[i].id}" src="${imageArr[1]}"> </div>
+              <div class="item" ><img class="ProductOwlImg" data-title="${data[i].id}" src="${imageArr[2]}"></div>
+            </div>
+        </div>
+          ${data[i].title} <p><b><i>${data[i].price}TL</i></b></p>
+          <div class="addBasket"  data-title="${data[i].id}" ><i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
+          </div>
+        </div>
+
+        `;
             $(appendItem).append(htmlItem);
+            owlLoader();
 
 
           }
@@ -134,7 +202,7 @@
       var selectedItem = $(this).data('title');
 
       $.get("./js/products.json", function (data) {
-       
+
         AddBasket(data[selectedItem - 1]);
         swal("İşlem Başarılı!", "Ürün sepete eklendi!", "success");
         NotBarFill();
@@ -146,12 +214,29 @@
     })
 
 
-    $(document).on("click", ".ShopItem", function () {
-      var selectedItem = $(this).data('title');
+    $(document).on("click", ".owl-carousel :not(.owl-dots)", function (e) {
+      //var selectedItem = $(this).data('title');
+      var selectedItem = $(this).parent().data('title');
+    
+      /*
+      
+      $(".server").on('click', ':not(.delete-server)', function (e) {
+           e.stopPropagation()
+           // Show edit dialog
+      });*/
+
+      //if ((state != 10) && (state != 15)
+      if (($(e.target).is('span')) || ($(e.target).is('button'))) {
+
+
+      } else {
+      
+       
+        window.location.href = './productDetail.html?ProductId=' + selectedItem + '';
+      }
 
 
 
-      window.location.href = './productDetail.html?ProductId=' + selectedItem + '';
 
 
 
@@ -159,12 +244,16 @@
   </script>
   <!--products javascript done-->
 
+  <script src="./owlcarousel/owl.carousel.js"></script>
 
 </head>
 
 <body>
+  <!---->
 
 
+
+  <!---->
   <script>
     function runn() {
       localStorage.clear();
@@ -175,7 +264,7 @@
 
     <ul>
       <li><a href="./index.html" class="inn">Anasayfa</a></li>
-      <li ><a class="LoginCont" href="./profile.html">Hesabım</a>
+      <li><a class="LoginCont" href="./profile.html">Hesabım</a>
         <ul id="loginUl" class="loginUl">
           <li class="loginLi"><a href="./login.html">Giriş Yap</a></li>
           <li class="loginLi"><a href="./register.html">Kayıt Ol</a></li>
@@ -185,13 +274,13 @@
         $(document).ready(function () {
           $(".LoginCont").mouseover(function () {
             $(".loginLi").addClass("displaytest");
-            setTimeout(function () {  $(".loginLi").removeClass("displaytest"); }, 3000);
-          
+            setTimeout(function () { $(".loginLi").removeClass("displaytest"); }, 3000);
+
           });
 
-            
-     
-          
+
+
+
 
         });
       </script>
@@ -206,6 +295,8 @@
   </div>
 
   <script>
+
+
 
     NotBarFill();
 
@@ -272,108 +363,40 @@ Data come from below section as javascript / json
     <div class="content">
       <hr class="hrline">
       <h1 class="BrandNav"></h1>
-      <section class="lazy slider" data-sizes="50vw" style="margin-top:20px;">
 
-        <div>
-          <img data-lazy="http://placehold.it/350x300?text=2-350w" data-srcset="./imgs/carouselImgs/2.jpg"
-            data-sizes="100vw">
-        </div>
-        <div>
-          <img data-lazy="http://placehold.it/350x300?text=3-350w" data-srcset="./imgs/carouselImgs/3.jpg"
-            data-sizes="100vw">
-        </div>
-        <div>
-          <img data-lazy="http://placehold.it/350x300?text=4-350w" data-srcset="./imgs/carouselImgs/4.jpg"
-            data-sizes="100vw">
-        </div>
-
-      </section>
 
       <!--Slick Slider Carousel Start-->
-      <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
-      <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+      <!-- <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script> slinck js kaldırılcak
+      <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>-->
       <script src="./js/index.js" type="text/javascript" charset="utf-8"></script>
       <script src="./js/session.js" type="text/javascript" charset="utf-8"></script>
       <script src="./js/keyConstants.js" type="text/javascript" charset="utf-8"></script>
 
-      <script type="text/javascript">
-
-
-        $(document).on('ready', function () {
 
 
 
-          $(".vertical-center-4").slick({
-            dots: true,
-            vertical: true,
-            centerMode: true,
-            slidesToShow: 4,
-            slidesToScroll: 2
-          });
-
-          $(".vertical-center-3").slick({
-            dots: true,
-            vertical: true,
-            centerMode: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
-          });
-          $(".vertical-center-2").slick({
-            dots: true,
-            vertical: true,
-            centerMode: true,
-            slidesToShow: 2,
-            slidesToScroll: 2
-          });
-          $(".vertical-center").slick({
-            dots: true,
-            vertical: true,
-            centerMode: true,
-          });
-          $(".vertical").slick({
-            dots: true,
-            vertical: true,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-
-
-          });
-          $(".regular").slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
-          });
-          $(".center").slick({
-            dots: true,
-            infinite: true,
-            centerMode: true,
-            slidesToShow: 5,
-            slidesToScroll: 3,
-
-          });
-          $(".variable").slick({
-            dots: true,
-            infinite: true,
-            variableWidth: true,
-
-          });
-          $(".lazy").slick({
-            lazyLoad: 'ondemand', // ondemand progressive anticipated
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 6000,
-          });
-
-        });
-      </script>
-
-      <!--Slick Slider Carousel Done-->
 
       <div class="ShopItemsContainer">
 
+  
+        
+ 
 
-        <!--  
+              
+  
+   
+
+
+
+
+
+      </div>
+
+
+
+
+
+      <!--  
           data come from above section-js
      
         '<div class="ShopItems"><div class="ShopItem" style="background: url(' + data[i].image +
@@ -387,15 +410,146 @@ Data come from below section as javascript / json
           
         
         -->
-      </div>
     </div>
+  </div>
 
 
   </div>
 
 
 
+  <!----->
 
+
+  <!--background-size:150px 200px;-->
+
+
+
+
+
+  <br>
+
+  <script>
+        owlLoader();
+        function owlLoader(){
+          
+    var owl = $('.owl-1');
+   owl.owlCarousel({
+       loop:true,
+       touchDrag  : true,
+        mouseDrag  : true,
+       margin:10,
+       rewind:true,
+     items:1,
+   });
+   /*
+
+   owl.on('mousewheel', '.owl-stage', function (e) {
+  console.warn(e);
+       if (e.deltaY>0) {
+  
+        $(e.target).trigger('next.owl');
+        
+        
+          
+       } else {
+        $(e.target).trigger('prev.owl');
+       }
+       $(e.target).preventDefault();
+   }); */
+
+        }
+   
+   /*
+    var i;
+    for (i = 1; i < 2 + 1; i++) {
+
+
+      $('.owl-' + i + '').owlCarousel({
+        loop: true,
+        touchDrag: true,
+        mouseDrag: true,
+        margin: 10,
+        rewind: true,
+        items: 1,
+      });
+
+      $('.owl-' + i + '').on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY > 0) {
+          $('.owl-' + i + '').trigger('next.owl');
+        } else {
+          $('.owl-' + i + '').trigger('prev.owl');
+        }
+        e.preventDefault();
+      });
+     
+
+    } */
+
+    /*
+    var owl = $('.owl-1');
+   owl.owlCarousel({
+       loop:true,
+       touchDrag  : true,
+        mouseDrag  : true,
+       margin:10,
+       rewind:true,
+     items:1,
+   });
+   owl.on('mousewheel', '.owl-stage', function (e) {
+       if (e.deltaY>0) {
+           owl.trigger('next.owl');
+       } else {
+           owl.trigger('prev.owl');
+       }
+       e.preventDefault();
+   });
+   
+   
+   var owl2 = $('.owl-2');
+   owl2.owlCarousel({
+       loop:true,
+       touchDrag  : true,
+        mouseDrag  : true,
+       margin:10,
+       rewind:true,
+     items:1,
+   });
+   owl2.on('mousewheel', '.owl-stage', function (e) {
+       if (e.deltaY>0) {
+           owl2.trigger('next.owl');
+       } else {
+           owl2.trigger('prev.owl');
+       }
+       e.preventDefault();
+   });*/
+    /*
+    var owl2 = $('.owl-2');
+    owl2.owlCarousel({
+        loop:true,
+        touchDrag  : true,
+         mouseDrag  : true,
+        margin:10,
+        rewind:true,
+      items:1,
+    });
+    owl2.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY>0) {
+            owl2.trigger('next.owl');
+        } else {
+            owl2.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });*/
+
+
+
+
+
+
+
+
+  </script>
 
 </body>
 

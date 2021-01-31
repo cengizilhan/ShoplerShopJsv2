@@ -32,15 +32,39 @@
       localStorage.clear();
     }
   </script>
+  </script>
   <div class="headerCont">
     <span class="logo"><a href="./index.html">Shoplyer</a></span>
 
     <ul>
-      <li><a href="./index.html">Anasayfa</a></li>
-      <li><a href="./profile.html">Hesabım</a></li>
+      <li><a href="./index.html" class="inn">Anasayfa</a></li>
+      <li ><a class="LoginCont" href="./profile.html">Hesabım</a>
+        <ul id="loginUl" class="loginUl">
+          <li class="loginLi"><a href="./login.html">Giriş Yap</a></li>
+          <li class="loginLi"><a href="./register.html">Kayıt Ol</a></li>
+        </ul>
+      </li>
+      <script>
+        $(document).ready(function () {
+          $(".LoginCont").mouseover(function () {
+            $(".loginLi").addClass("displaytest");
+            setTimeout(function () {  $(".loginLi").removeClass("displaytest"); }, 3000);
+          
+          });
+
+            
+     
+          
+
+        });
+      </script>
+
       <li><a href="./basket.html">Sepetim</a>
         <span class="NotBarContainer"></span>
 
+      </li>
+
+    </ul>
 
   </div>
   </li>
