@@ -78,7 +78,28 @@ function NotBarFill() {
     $.get("./js/products.json", function (data) {
 
       AddBasket(data[selectedItem - 1]);
-      swal("İşlem Başarılı!", "Ürün sepete eklendi!", "success");
+      swal("Ürün sepete eklendi!", {
+        buttons: {
+          cancel: "Alışverişe devam et!",
+          catch: {
+            text: "Sepete git!",
+            value: "sepet",
+          },
+          defeat:false,
+        },
+      })
+      .then((value) => {
+        switch (value) {
+       
+          case "sepet":
+          window.location.href = "./basket.html";
+      
+            break;
+       
+       
+        
+        }
+      });
       NotBarFill();
 
 
