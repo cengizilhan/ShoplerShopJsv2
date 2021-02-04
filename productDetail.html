@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
   <link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
 
   
   
@@ -37,6 +38,12 @@
 
 </head>
 <script>
+
+
+
+
+
+
 
 
   function NotBarFill() {
@@ -69,6 +76,7 @@
 
     $.get("./js/products.json", function (data) {
       AddBasket(data[selectedItem - 1]);
+      swal("İşlem Başarılı!", "Ürün sepete eklendi!", "success");
       NotBarFill();
     });
 
@@ -112,15 +120,16 @@
         
     <div class="verticaldiv smallimg" id="tumpimgs">
 
-      </div>
+    
    
-      <a data-fancybox="gallery" href="${imageArr[0]}">  <div  class="tumpimg" style="background-image:url('${imageArr[0]}'" ></div></a>
+      <div  class="tumpimg" style="background-image:url('${imageArr[0]}'" ></div>
 
-      <a data-fancybox="gallery" href="${imageArr[1]}">  <div class="tumpimg" style="background-image:url('${imageArr[1]}'"></div></a>
+      <div class="tumpimg" style="background-image:url('${imageArr[1]}'"></div>
 
       
-      <a data-fancybox="gallery" href="${imageArr[2]}">  <div class="tumpimg" style="background-image:url('${imageArr[2]}'"></div></a>
+      <div class="tumpimg" style="background-image:url('${imageArr[2]}'"></div>
 
+</div>
 </div>
 <a data-fancybox="gallery" href="${imageArr[0]}"> 
 
@@ -128,7 +137,7 @@
    
  
 	
-		<img class="zoom verticaldiv bigimg"  src='${imageArr[0]}' data-magnify-src='${imageArr[0]}'> </img>	
+		<img class="zoom verticaldiv bigimg" id="bigimg"  src='${imageArr[0]}' data-magnify-src='${imageArr[0]}'> </img>	
 	
   
 
@@ -390,7 +399,22 @@ $(document).ready(function() {
 
   </div>
 
+<script>
 
+$('.tumpimg').click(function(){
+  alert("The paragraph was clicked.");
+});
+
+
+$(document).on("click", ".tumpimg", function (e) { 
+
+var bg = $(this).css('background-image');
+bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
+$('#bigimg').attr('src', bg)
+console.warn(bg);
+})
+
+</script>
   
 </body>
 
